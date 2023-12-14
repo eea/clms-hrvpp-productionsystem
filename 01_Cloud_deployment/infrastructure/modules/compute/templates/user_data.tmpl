@@ -1,0 +1,32 @@
+#cloud-config
+hostname: ${fqdn}
+fqdn: ${fqdn}
+%{ if puppet_env != "" }
+
+write_files:
+  - path: /etc/puppetlabs/puppet/puppet.conf
+    content: |
+      [main]
+        server = foreman.vgt.vito.be
+      [agent]
+        environment = ${puppet_env}
+  - path: /tmp/run_puppet.sh
+    content: |
+      #!/bin/bash
+      # Params
+      lock='/var/run/bootstrappuppet'
+      exec 200>$lock
+      flock -n 200 || exit 1
+      pid=$$
+      echo $pid 1>&200
+      echo 'First run and then sleep so foreman can update the env'
+      /opt/puppetlabs/bin/puppet agent --test
+      sleep 120
+      amount=0
+      while ! /opt/puppetlabs/bin/puppet agent --test; do if [[ $amount -gt 15 ]]; then break; fi; sleep 1; amount=$(($amount+1)); done
+
+runcmd:
+  - systemctl stop puppet
+  - rm -rf /var/cache/yum
+  - /bin/bash /tmp/run_puppet.sh
+%{ endif }

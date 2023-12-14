@@ -1,0 +1,116 @@
+---
+profile_oscars_download::oidc::enable_oauth2: false
+profile_oscars_download::oidc::enable_oauth: true
+
+profile_base::enable_selinux: true
+profile_monitoring::default_service_notification_period: 'workhours'
+profile_monitoring::default_host_notification_period: 'workhours'
+profile_monitoring::hostgroups:
+  - phenology2
+profile_elasticsearch::ipaddress: "%{::networking.ip}"
+profile_base::user::root::password_hash: REDACTED
+profile_monitoring::vars:
+  config:
+    disks:
+      disk_wfree: 10%
+      disk_cfree: 5%
+    procs:
+      procs_warning: 400
+      procs_critical: 500
+profile_beats::filebeat::version: '7.5.1'
+profile_beats::metricbeat::version: '7.5.1'
+profile_elasticsearch::es_version: '7.5.1'
+profile_elasticsearch::cluster_name: 'cf3_prod'
+profile_elasticsearch::backup: true
+
+profile_spark::log_dir: 's3a://hr-vpp-spark/history_prd'
+profile_spark::ssl: true
+profile_spark::ssl_cert_name: '*.hrvpp2.vgt.vito.be'
+profile_spark::ssl_keystore_password: &keystore_password REDACTED
+profile_spark::ssl_truststore_password: &truststore_password REDACTED
+profile_spark::domain: hrvpp2.vgt.vito.be
+profile_spark::history::spark_config:
+  'history.fs.cleaner.enabled': 'true'
+  'history.fs.cleaner.maxAge': '30d'
+  'hadoop.fs.s3a.list.version': '1'
+profile_spark::history::environment_config:
+  'SPARK_DAEMON_MEMORY': '2304m'
+
+profile_spark::environment_config:
+  'AWS_ACCESS_KEY_ID': REDACTED
+  'AWS_SECRET_ACCESS_KEY': REDACTED
+profile_spark::spark_config:
+  'hadoop.fs.s3a.endpoint': &aws_url 'https://s3.waw3-1.cloudferro.com'
+  'hadoop.fs.s3a.path.style.access': 'true'
+  'ssl.enabled': 'true'
+  'ssl.keyStore': REDACTED
+  'ssl.trustStore': REDACTED
+  'ssl.keyStorePassword': REDACTED
+  'ssl.keyPassword': REDACTED
+  'ssl.trustStorePassword': REDACTED
+  'ssl.protocol': 'TLSv1.2'
+
+profile_livy::livy_config:
+  'hadoop.fs.s3a.endpoint': *aws_url
+  'hadoop.fs.s3a.path.style.access': 'true'
+  'spark.master': 'spark://spark-master-1.hrvpp2.vgt.vito.be:7077'
+  'spark.deploy-mode': client
+  'keystore': REDACTED
+  'keystore.password': REDACTED
+  'key-password': REDACTED
+profile_livy::environment_config:
+  'AWS_ACCESS_KEY_ID': REDACTED
+  'AWS_SECRET_ACCESS_KEY': REDACTED
+  'PYSPARK_PYTHON': '/usr/bin/python3'
+
+profile_datamounts::access_key_id: REDACTED
+profile_datamounts::secret_access_key: REDACTED
+profile_datamounts::s3fs_url: *aws_url
+
+profile_metrics::collectd::graphite_host: graphite-1.hrvpp2.vgt.vito.be
+
+profile_spark::history::ui_port: '8080'
+profile_spark::worker::master: spark-master-1.hrvpp2.vgt.vito.be
+
+profile_python::config::user: REDACTED
+profile_python::config::password: REDACTED
+profile_python::python36::pips:
+  - pyspark==2.3.2
+  - docker==4.2.2
+  - boto3==1.15.7
+profile_python::python36::dependencies:
+  gcc:
+    ensure: present
+
+profile_docker::registries:
+  vito-docker-private:
+    server: vito-docker-private.artifactory.vgt.vito.be
+    ensure: present
+    username: REDACTED
+    password: REDACTED
+profile_docker::users:
+  REDACTED
+profile_docker::docker_pull_users:
+  REDACTED
+
+# Apache performance metrics
+profile_base::enable_collectd: true
+profile_base::collectd::server: graphite-1.hrvpp2.vgt.vito.be
+profile_apache::enable_metrics: true
+
+apache::mod::prefork::maxrequestworkers: 500
+apache::mod::prefork::serverlimit: 500
+
+profile_apache::default_remoteip_proxies: ['192.168.151.0/24']
+
+fluentbit::manage_repo: false
+fluentbit::outputs:
+  s3:
+    type: output
+    pipeline_name: S3
+    config:
+      match: '*'
+      region: default
+      s3_key_format: REDACTED
+      static_file_path: true
+      endpoint: *aws_url

@@ -1,0 +1,15 @@
+---
+role: roles::elasticsearch
+profile_elasticsearch::disk: '/dev/sdb'
+profile_base::enable_firewall: true
+profile_base::firewall::ensure: 'stopped'
+profile_base::create_filesystem:
+  '/dev/sdb':
+    fs_type: 'xfs'
+
+profile_datamounts::s3fs_mounts:
+  '/mnt/backups/ES_backup':
+    bucket: hr-vpp-backup
+    folder: /es-prd
+    readonly: false
+    uid: 995

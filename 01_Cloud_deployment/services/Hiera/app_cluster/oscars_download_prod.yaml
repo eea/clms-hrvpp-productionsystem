@@ -1,0 +1,74 @@
+role: roles::oscars_download
+
+profile_base::enable_selinux: true
+profile_base::selinux: permissive
+
+profile_monitoring::hostgroups:
+  - oscars
+
+profile_oscars_download::log_level: 'info'
+profile_oscars_download::mod_php_version: '7.4.19'
+profile_oscars_download::oidc::mod_auth_openidc_version: '2.4.4'
+profile_oscars_download::oidc::config:
+  identity.apps.mercator.dpi.wekeo.eu:443/oauth2/token:
+    OIDCRedirectURI: 'https://phenology.vgt.vito.be/download/private/redirect_uri'
+    OIDCCryptoPassphrase: REDACTED
+    OIDCRemoteUserClaim: 'sub'
+    OIDCProviderTokenEndpointAuth: 'client_secret_basic'
+    OIDCProviderMetadataURL: 'https://identity.apps.mercator.dpi.wekeo.eu/oauth2/oidcdiscovery/.well-known/openid-configuration'
+    OIDCCacheType: 'file'
+    OIDCCacheDir: '/var/cache/httpd/mod_auth_openidc/cache'
+    OIDCClientID: REDACTED
+    OIDCClientSecret: REDACTED
+    OIDCScope: '"openid profile"'
+    OAuth2TargetPass: 'remote_user_claim=username'
+    OAuth2AcceptTokenIn: 'header'
+    OAuth2Cache: "file name=sharedFile&dir=/var/cache/httpd/mod_auth_openidc/cache"
+    OAuth2TokenVerify: "introspect https://identity.apps.mercator.dpi.wekeo.eu/oauth2/introspect introspect.auth=client_secret_basic&client_id=token-validator-vito&client_secret=REDACTED"  # yamllint disable-line rule:line-length
+
+profile_oscars_download::resources:
+  VI_V01:
+    path: /HRVPP/CLMS/VI_V01/
+    restrictions:
+      -
+        regex: 'VI_V01/.*(\.tif)$'
+        roles: []
+  ST_V01:
+    path: /HRVPP/CLMS/ST_V01/
+    restrictions:
+      -
+        regex: 'ST_V01/.*(\.tif)$'
+        roles: []
+  VPP_V01:
+    path: /HRVPP/CLMS/VPP_V01/
+    restrictions:
+      -
+        regex: 'VPP_V01/.*(\.tif)$'
+        roles: []
+  ST_LAEA_V01:
+    path: /HRVPP/CLMS/ST_LAEA_V01/
+    restrictions:
+      -
+        regex: 'ST_LAEA_V01/.*(\.tif)$'
+        roles: []
+  VPP_LAEA_V01:
+    path: /HRVPP/CLMS/VPP_LAEA_V01/
+    restrictions:
+      -
+        regex: 'VPP_LAEA_V01/.*(\.tif)$'
+        roles: []
+
+profile_datamounts::groups:
+  - clms_hrvpp2_dissem
+profile_datamounts::access_key_id: REDACTED
+profile_datamounts::secret_access_key: REDACTED
+profile_datamounts::s3fs_mounts:
+  '/mnt/data':
+    bucket: hr-vpp-products
+    ensure: absent
+  '/var/cache/httpd/mod_auth_openidc/cache':
+    bucket: hr-vpp-httpd
+    folder: /httpd-prd
+    readonly: false
+    uid: 48
+    gid: 48

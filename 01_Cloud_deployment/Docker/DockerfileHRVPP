@@ -1,0 +1,15 @@
+FROM vito-docker-private.artifactory.vgt.vito.be/hrvpp-biopar:25
+
+
+RUN pip install --no-cache-dir rasterio[s3]==1.0.26 "s3fs<0.5.0"  awscli fire requests s3cmd
+
+RUN mkdir -p /home/user
+
+COPY pl_sen2_vi/src/sentinel2biopar/cluster/workflow_runner_hrvpp.py /home/user
+COPY pl_sen2_vi/docker/config_hrvpp_WEkEO_v101.ini /home/user
+COPY pl_vi/MDVI.py /home/user
+COPY pl_sen2_vi/src/sentinel2biopar /home/user/sentinel2biopar
+COPY pl_sen2_vi/src/sentinel2biopar/PPI_single.py /home/user
+COPY pl_timesat /home/user
+COPY pl_LAEA /home/user
+COPY pl_LAEA/.s3cfg /root/.s3cfg

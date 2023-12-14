@@ -1,0 +1,86 @@
+---
+profile_apache::extra_mods:
+  - headers
+  - proxy_balancer
+  - lbmethod_bybusyness
+  - slotmem_shm
+profile_apache::vhosts:
+  phenology.hrvpp2.vgt.vito.be_80:
+    servername: phenology.hrvpp2.vgt.vito.be
+    serveraliases:
+      - phenology.vgt.vito.be
+      - phenology-1.vgt.vito.be
+      - phenology-2.vgt.vito.be
+      - phenology-3.vgt.vito.be
+      - phenology-a.vgt.vito.be
+      - phenology-b.vgt.vito.be
+      - phenology-c.vgt.vito.be
+    allow_encoded_slashes: 'on'
+    rewrite_cond: ['%%{}{HTTPS} !=on']
+    rewrite_rule: '^/?(.*) https://%%{}{SERVER_NAME}/$1 [R,L]'
+  phenology.hrvpp2.vgt.vito.be_443:
+    servername: phenology.hrvpp2.vgt.vito.be
+    serveraliases:
+      - phenology.vgt.vito.be
+      - phenology-1.vgt.vito.be
+      - phenology-2.vgt.vito.be
+      - phenology-3.vgt.vito.be
+      - phenology-a.vgt.vito.be
+      - phenology-b.vgt.vito.be
+      - phenology-c.vgt.vito.be
+    ssl: true
+    force_ssl: false
+    generate_ssl_redirect: false
+    ssl_vito_cert_params:
+      domains:
+        - phenology.hrvpp2.vgt.vito.be
+        - phenology.vgt.vito.be
+        - phenology-1.vgt.vito.be
+        - phenology-2.vgt.vito.be
+        - phenology-3.vgt.vito.be
+        - phenology-a.vgt.vito.be
+        - phenology-b.vgt.vito.be
+        - phenology-c.vgt.vito.be
+    custom_fragment: |
+      RequestHeader set X-Forwarded-Proto "https"
+      RequestHeader set X-Forwarded-Port "443"
+      <LocationMatch "/wmts.*">
+        RequestHeader set base_url "https://phenology.hrvpp2.vgt.vito.be/wmts"
+      </LocationMatch>
+      <Proxy balancer://oscars-downloads>
+        BalancerMember http://oscars-download-1.hrvpp2.vgt.vito.be:80
+        BalancerMember http://oscars-download-2.hrvpp2.vgt.vito.be:80
+        Proxyset failonstatus=500
+        Proxyset timeout=1200
+        Proxyset lbmethod=bybusyness
+      </Proxy>
+      <Proxy balancer://oscars>
+        BalancerMember http://oscars-1.hrvpp2.vgt.vito.be:8080
+        BalancerMember http://oscars-2.hrvpp2.vgt.vito.be:8080
+        Proxyset failonstatus=500
+        Proxyset timeout=1200
+        Proxyset lbmethod=bybusyness
+        SetEnv force-proxy-request-1.0 1
+        SetEnv proxy-nokeepalive 1
+      </Proxy>
+      <Proxy balancer://wmts>
+        BalancerMember http://wmts-1.hrvpp2.vgt.vito.be:8080
+        BalancerMember http://wmts-2.hrvpp2.vgt.vito.be:8080
+        Proxyset failonstatus=500
+        Proxyset timeout=1200
+        Proxyset lbmethod=bybusyness
+      </Proxy>
+    proxy_pass:
+      - path: /download
+        url: balancer://oscars-downloads/download/
+      - path: /wms
+        url: balancer://wmts/service/wms/
+      - path: /wmts
+        url: balancer://wmts/service/wmts/
+    proxy_pass_match:
+      - path: ^/description(.*)$
+        url: balancer://oscars/description$1
+      - path: ^/collections(.*)$
+        url: balancer://oscars/collections$1
+      - path: ^/products(.*)$
+        url: balancer://oscars/products$1

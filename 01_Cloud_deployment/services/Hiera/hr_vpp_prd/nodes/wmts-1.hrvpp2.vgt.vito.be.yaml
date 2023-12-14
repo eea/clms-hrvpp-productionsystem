@@ -1,0 +1,92 @@
+role: roles::wmts
+
+profile_tomcat::enable_jenkins: false
+profile_tomcat::repository: libs-snapshot-local
+profile_tomcat::java_extra_opts: "-DGEOWEBCACHE_PROJECT=clms_hrvpp -Daws.enabled -Daws.endpoint=https://s3.waw3-1.cloudferro.com -Daws.region=RegionOne -Daws.accessKeyId=REDACTED -Daws.secretAccessKey=REDACTED -Daws.socketTimeout=60 -Daws.connectionTimeout=10 -Daws.maxConnections=75 -Daws.connectionAcquisitionTimeout=10 -DgdalRasterSource=FALSE -DCPL_TIMESTAMP=ON -Djava.library.path=/usr/local/lib"
+profile_tomcat::java_memory: '3g'
+
+profile_tomcat::config:
+  'geowebcache':
+    tomcat_dir: '/opt/tomcat/conf'
+
+profile_tomcat::tomcat_conf:
+  LD_LIBRARY_PATH: "/usr/local/lib"
+  AWS_DIRECT: "TRUE"
+  AWS_ACCESS_KEY_ID: REDACTED
+  AWS_SECRET_ACCESS_KEY: REDACTED
+  AWS_S3_ENDPOINT: "s3.waw3-1.cloudferro.com"
+  AWS_DEFAULT_REGION: "RegionOne"
+  AWS_REGION: "RegionOne"
+  AWS_HTTPS: "YES"
+  AWS_VIRTUAL_HOSTING: "FALSE"
+  CPL_DEBUG: 'OFF'
+  CPL_TIMESTAMP: 'ON'
+
+profile_tomcat::deploy:
+  'autodeploy':
+    'ROOT':
+      war: 'be/vito/eodata/gwc-geotrellis/war'
+      basepath: '/opt/tomcat/webapps'
+      version: '0.16.15'
+      repository: libs-release-local
+      snapshot: false
+
+profile_tomcat::enable_logrotate: true
+
+profile_base::packages::packages:
+  - gdal-3.7.0-1.el8
+
+profile_base::repos::additional_repos:
+  'vito-yum-almalinux8-public':
+    baseurl: 'https://artifactory.vgt.vito.be/artifactory/vito-yum-almalinux8-public'
+    gpgcheck: 0
+  vito-yum-almalinux8-custom:
+    name: 'vito-yum-almalinux8-custom'
+    baseurl: REDACTED
+    enabled: 1
+    gpgcheck: 0
+
+profile_monitoring::extra_checks:
+  check_http:
+    getCapabilities:
+      http_options:
+        http_address: 'localhost'
+        http_port: 8080
+        http_uri: '/service/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true'
+  check_jmx:
+    Leased_Connections:
+      attribute: Leased
+      object: SdkHttpClient
+      domain: 'be.vito.eodata.gwcgeotrellis.s3'
+      warning: 1000
+      critical: 2000
+    Pending_Connections:
+      attribute: Pending
+      object: SdkHttpClient
+      domain: 'be.vito.eodata.gwcgeotrellis.s3'
+      warning: 1000
+      critical: 2000
+    RoutesTotal:
+      attribute: RoutesTotal
+      object: SdkHttpClient
+      domain: 'be.vito.eodata.gwcgeotrellis.s3'
+      warning: 1000
+      critical: 2000
+    Available:
+      attribute: Available
+      object: SdkHttpClient
+      domain: 'be.vito.eodata.gwcgeotrellis.s3'
+      warning: 1000
+      critical: 2000
+    MaxTotal:
+      attribute: MaxTotal
+      object: SdkHttpClient
+      domain: 'be.vito.eodata.gwcgeotrellis.s3'
+      warning: 1000
+      critical: 2000
+    DefaultMaxPerRoute:
+      attribute: DefaultMaxPerRoute
+      object: SdkHttpClient
+      domain: 'be.vito.eodata.gwcgeotrellis.s3'
+      warning: 1000
+      critical: 2000

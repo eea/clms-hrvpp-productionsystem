@@ -1,0 +1,36 @@
+{
+ "Version": "2012-10-17",
+ "Id": "hr-vpp-scripts-policy",
+ "Statement": [
+   {
+     "Sid": "allow-ro-access",
+     "Effect": "Allow",
+     "Principal": {
+       "AWS": [REDACTED]
+     },
+     "Action": [
+       "s3:ListBucket",
+       "s3:GetObject"
+     ],
+     "Resource": [
+       "arn:aws:s3:::*"
+     ]
+   },
+   {
+     "Sid": "allow-rw-access",
+     "Effect": "Allow",
+     "Principal": {
+       "AWS": [REDACTED]
+     },
+     "Action": [
+       "s3:ListBucket",
+       "s3:PutObject",
+       "s3:DeleteObject",
+       "s3:GetObject"
+     ],
+     "Resource": [
+       "arn:aws:s3:::*"
+     ]
+   }
+ ]
+}

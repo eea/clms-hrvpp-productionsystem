@@ -1,0 +1,51 @@
+---
+role: roles::vpn
+profile_base::enable_monitoring: true
+profile_base::enable_puppet: true
+profile_base::repos::manage_epel: true
+profile_base::enable_repos: true
+profile_base::ntp::servers:
+  - 0.europe.pool.ntp.org
+sudo::configs:
+  'almalinux':
+    ensure: present
+    priority: 10
+    content: 'almalinux ALL=(ALL) NOPASSWD: ALL'
+
+profile_base::users:
+  REDACTED
+  
+profile_base::enable_firewall: true
+profile_base::firewall::allow_ssh: false
+profile_base::firewall::allow_icinga: false
+profile_base::firewall::rules:
+  '007 Allow inbound icinga from icinga':
+    dport: 5665
+    proto: tcp
+    action: accept
+    source: '192.168.20.0/24'
+  '010 allow ssh from intern range':
+    dport: 22
+    proto: tcp
+    action: accept
+    source: '192.168.20.0/24'
+  '010 allow ssh from vitovm range':
+    dport: 22
+    proto: tcp
+    action: accept
+    source: '192.168.120.0/24'
+  '010 allow ssh from vito range':
+    dport: 22
+    proto: tcp
+    action: accept
+    source: '193.190.189.0/24'
+  '010 allow ssh from vitoBYOD range':
+    dport: 22
+    proto: tcp
+    action: accept
+    source: '172.24.236.0/23'
+  '010 allow ssh from vitoVPN range':
+    dport: 22
+    proto: tcp
+    action: accept
+    source: '172.24.232.0/22'

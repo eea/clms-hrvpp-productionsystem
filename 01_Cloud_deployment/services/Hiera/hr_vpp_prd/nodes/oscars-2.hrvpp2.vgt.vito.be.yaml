@@ -1,0 +1,19 @@
+role: roles::oscars
+
+profile_monitoring::hostgroups:
+  - oscars
+
+profile_oscars::stage_jar: true
+profile_oscars::jar_version: '0.9.5'
+profile_oscars::security_enabled: false
+profile_oscars::es_coll_index: 'oscars_collections'
+profile_oscars::es_hosts: 'http://es-1.hrvpp2.vgt.vito.be:9200,http://es-2.hrvpp2.vgt.vito.be:9200,http://es-3.hrvpp2.vgt.vito.be:9200'
+profile_oscars::accessed_from: 'HTTP,S3,S3-private'
+
+profile_base::sysctl::settings:
+  net.ipv4.tcp_keepalive_time:
+    value: 30
+  net.ipv4.tcp_keepalive_intvl:
+    value: 10
+  net.ipv4.tcp_keepalive_probes:
+    value: 5

@@ -1,0 +1,27 @@
+domain_name                  = "hrvpp2-dev.vgt.vito.be"
+puppet_env                   = "hr_vpp_dev"
+lb_name                      = "phenology-dev"
+lb_create                    = true
+lb_floating_ip               = 1
+manage_secgroup              = true
+spark_worker_secgroup_create = true
+manage_dns                   = true
+provision_kibana             = false
+provision_elasticsearch      = false
+provision_graphite           = false
+provision_nifi               = false
+provision_ingest             = false
+provision_spark_history      = false
+provision_oscars             = true
+provision_oscars_download    = true
+provision_web                = true
+provision_wmts               = false
+wmts_nodes                   = 0
+provision_spark_master_vi    = false
+provision_spark_master_ts    = false
+provision_spark_master_seed  = false
+provision_spark_workers      = false
+web_nodes                    = 1
+oscars_nodes                 = 1
+image_name                   = "puppet_base_image_dev-alma82022-10-07_10-22-08"
+

@@ -1,0 +1,36 @@
+{
+    "s3_bucket_stats_001": {
+        "aliases": {
+            "s3_bucket_stats": {}
+        },
+        "mappings": {
+            "properties": {
+                "bytes": {
+                    "type": "long"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "keyword"
+                },
+                "timestamp": {
+                    "format": "strict_date_optional_time_nanos",
+                    "type": "date"
+                }
+            }
+        },
+        "settings": {
+            "index": {
+                "creation_date": "1659595452696",
+                "number_of_replicas": "1",
+                "number_of_shards": "3",
+                "provided_name": "s3_bucket_stats_001",
+                "uuid": "BOvObaSsT0-D6qR1Mj2aWQ",
+                "version": {
+                    "created": "7050199"
+                }
+            }
+        }
+    }
+}

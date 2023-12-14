@@ -1,0 +1,20 @@
+{
+ "Version": "2012-10-17",
+ "Id": "hr-vpp-products-policy",
+ "Statement": [
+   {
+     "Sid": "allow_ro_access",
+     "Effect": "Allow",
+     "Principal": {
+       "AWS": [REDACTED]
+     },
+     "Action": [
+       "s3:ListBucket",
+       "s3:GetObject"
+     ],
+     "Resource": [
+       "arn:aws:s3:::*"
+     ]
+   }
+ ]
+}

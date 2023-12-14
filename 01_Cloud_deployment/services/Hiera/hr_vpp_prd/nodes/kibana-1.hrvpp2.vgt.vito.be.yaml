@@ -1,0 +1,22 @@
+---
+profile_base::enable_firewall: false
+
+profile_nginx::http_port: 8080
+profile_kibana::http_port: 8080
+profile_kibana::ssl: true
+profile_kibana::kibana_version: '7.5.1'
+profile_elasticsearch::data_node: false
+profile_elasticsearch::heap_size: 1024
+profile_elasticsearch::config:
+  node.master: false
+  node.data: false
+  node.ingest: false
+
+profile_datamounts::s3fs_mounts:
+  '/mnt/backups/ES_backup':
+    bucket: hr-vpp-backup
+    folder: /es-prd
+    readonly: false
+    uid: 990
+profile_kibana::config:
+  elasticsearch.requestTimeout: 60000

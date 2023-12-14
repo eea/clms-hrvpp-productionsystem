@@ -1,0 +1,57 @@
+---
+role: roles::nifi
+profile_nifi::version: 1.16.3
+profile_nifi::initial_admin: REDACTED
+profile_nifi::keystore_password: REDACTED
+profile_nifi::ldap_manager_dn: 'uid=REDACTED,cn=users,cn=accounts,dc=vgt,dc=vito,dc=be'
+profile_nifi::ldap_manager_password: REDACTED
+profile_nifi::ldap_hosts:
+  - 'ipa01.vgt.vito.be'
+  - 'ipa02.vgt.vito.be'
+profile_nifi::ldap_user_search_base: 'cn=users,cn=accounts,dc=vgt,dc=vito,dc=be'
+profile_nifi::user_group_provider_type: 'file'
+profile_nifi::ldap_group_search_base: 'cn=groups,cn=accounts,dc=vgt,dc=vito,dc=be'
+profile_nifi::monitoring_password: REDACTED
+profile_nifi::monitoring_username: REDACTED
+profile_nifi::https_address: "%{facts.fqdn}"
+profile_nifi::truststore_password: REDACTED
+profile_nifi::external_disk: '/dev/vdb'
+profile_nifi::enable_onsite_backup: true
+profile_nifi::enable_beats: false
+profile_nifi::openeo_folder: false
+nifi::config::nifi::provenance_max_size: '50GB'
+nifi::sensitive_props_key: REDACTED
+
+profile_python::python36::pips:
+  - geomet==0.2.1
+  - urllib3==1.25.11
+  - oscars-mgmnt==0.1.69
+  - boto3==1.15.7
+  - affine==2.3.1
+  - click-plugins==1.1.1
+  - cligj==0.7.2
+  - numpy==1.19.5
+  - pyparsing==3.0.9
+  - snuggs==1.4.7
+  - rasterio==1.0.26
+
+profile_base::repos::additional_repos:
+  'vito-yum-almalinux8-custom':
+    baseurl: REDACTED
+    gpgcheck: 0
+profile_base::create_filesystem:
+  '/dev/vdb':
+    fs_type: 'xfs'
+profile_base::packages::packages:
+  - 'gdal'
+
+profile_datamounts::access_key_id: REDACTED
+profile_datamounts::secret_access_key: REDACTED
+profile_datamounts::s3fs_mounts:
+  '/mnt/nifi-backup':
+    bucket: hr-vpp-backup
+    folder: /nifi-prd
+    readonly: false
+  '/mnt/data':
+    bucket: hr-vpp-products
+    ensure: absent

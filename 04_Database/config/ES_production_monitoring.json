@@ -1,0 +1,725 @@
+{
+    "hrvpp_product_catalog-0001": {
+        "aliases": {
+            "hrvpp_product_catalog": {}
+        },
+        "mappings": {
+            "dynamic": "false",
+            "properties": {
+                "assets": {
+                    "properties": {
+                        "cloudferro": {
+                            "properties": {
+                                "href": {
+                                    "fields": {
+                                        "keyword": {
+                                            "ignore_above": 256,
+                                            "type": "keyword"
+                                        }
+                                    },
+                                    "type": "text"
+                                },
+                                "type": {
+                                    "fields": {
+                                        "keyword": {
+                                            "ignore_above": 256,
+                                            "type": "keyword"
+                                        }
+                                    },
+                                    "type": "text"
+                                }
+                            }
+                        },
+                        "hrvpp": {
+                            "properties": {
+                                "vi": {
+                                    "properties": {
+                                        "fapar": {
+                                            "properties": {
+                                                "href": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                },
+                                                "product_id": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                }
+                                            }
+                                        },
+                                        "lai": {
+                                            "properties": {
+                                                "href": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                },
+                                                "product_id": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                }
+                                            }
+                                        },
+                                        "ndvi": {
+                                            "properties": {
+                                                "href": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                },
+                                                "product_id": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                }
+                                            }
+                                        },
+                                        "ppi": {
+                                            "properties": {
+                                                "href": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                },
+                                                "product_id": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                }
+                                            }
+                                        },
+                                        "qflag": {
+                                            "properties": {
+                                                "href": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                },
+                                                "product_id": {
+                                                    "fields": {
+                                                        "keyword": {
+                                                            "ignore_above": 256,
+                                                            "type": "keyword"
+                                                        }
+                                                    },
+                                                    "type": "text"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "metadata": {
+                            "properties": {
+                                "href": {
+                                    "fields": {
+                                        "keyword": {
+                                            "ignore_above": 256,
+                                            "type": "keyword"
+                                        }
+                                    },
+                                    "type": "text"
+                                },
+                                "type": {
+                                    "fields": {
+                                        "keyword": {
+                                            "ignore_above": 256,
+                                            "type": "keyword"
+                                        }
+                                    },
+                                    "type": "text"
+                                }
+                            }
+                        },
+                        "vito_filename": {
+                            "properties": {
+                                "href": {
+                                    "fields": {
+                                        "keyword": {
+                                            "ignore_above": 256,
+                                            "type": "keyword"
+                                        }
+                                    },
+                                    "type": "text"
+                                },
+                                "name": {
+                                    "fields": {
+                                        "keyword": {
+                                            "ignore_above": 256,
+                                            "type": "keyword"
+                                        }
+                                    },
+                                    "type": "text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "creationdate": {
+                    "type": "date"
+                },
+                "geometry": {
+                    "ignore_malformed": true,
+                    "type": "geo_shape"
+                },
+                "id": {
+                    "fields": {
+                        "keyword": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        }
+                    },
+                    "type": "text"
+                },
+                "links": {
+                    "properties": {
+                        "href": {
+                            "type": "text"
+                        },
+                        "rel": {
+                            "type": "keyword"
+                        }
+                    }
+                },
+                "product_status": {
+                    "fields": {
+                        "keyword": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        }
+                    },
+                    "type": "text"
+                },
+                "properties": {
+                    "properties": {
+                        "acquisitiontype": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "baresoilpercentage": {
+                            "type": "double"
+                        },
+                        "beginposition": {
+                            "type": "date"
+                        },
+                        "cloudcoverpercentage": {
+                            "type": "double"
+                        },
+                        "creationdate": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "cs:product_level": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "cs:type": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "datastripidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "datatakesensingstart": {
+                            "type": "date"
+                        },
+                        "datetime": {
+                            "type": "date"
+                        },
+                        "download_date": {
+                            "type": "date"
+                        },
+                        "endposition": {
+                            "type": "date"
+                        },
+                        "eo:cloud_cover": {
+                            "type": "double"
+                        },
+                        "eo:collection": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "eo:platform": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "filename": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "footprint": {
+                            "type": "text"
+                        },
+                        "format": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "gmlfootprint": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "granuleidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "hv_order_tileid": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "identifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "ingestiondate": {
+                            "type": "date"
+                        },
+                        "instrumentname": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "instrumentshortname": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "l1cidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "lastorbitnumber": {
+                            "type": "integer"
+                        },
+                        "lastrelativeorbitnumber": {
+                            "type": "short"
+                        },
+                        "level1cpdiidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "lowprobacloudspercentage": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "missiondatatakeid": {
+                            "type": "integer"
+                        },
+                        "orbitdirection": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        },
+                        "orbitnumber": {
+                            "type": "integer"
+                        },
+                        "platformidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "platformname": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "platformserialidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "polarisationmode": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        },
+                        "processed": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "processing_status": {
+                            "properties": {
+                                "catalog_available_date": {
+                                    "type": "date"
+                                },
+                                "metadata_ingested": {
+                                    "type": "date"
+                                },
+                                "ppi_processing_enddate": {
+                                    "type": "date"
+                                },
+                                "ppi_processing_startdate": {
+                                    "type": "date"
+                                },
+                                "processing_end": {
+                                    "type": "date"
+                                },
+                                "status": {
+                                    "type": "keyword"
+                                },
+                                "vi_processing_enddate": {
+                                    "type": "date"
+                                },
+                                "vi_processing_startdate": {
+                                    "type": "date"
+                                }
+                            }
+                        },
+                        "processingbaseline": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "processinglevel": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "product_status": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "productclass": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "producttype": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "provider": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "published": {
+                            "type": "date"
+                        },
+                        "related_qflag": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "relativeorbitnumber": {
+                            "type": "short"
+                        },
+                        "s2datatakeid": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "sensoroperationalmode": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "size": {
+                            "type": "text"
+                        },
+                        "slicenumber": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "source_product": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "srs": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "status": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "swathidentifier": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "tileid": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "timeliness": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "uuid": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "version": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        }
+                    }
+                },
+                "summary": {
+                    "fields": {
+                        "keyword": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        }
+                    },
+                    "type": "text"
+                },
+                "title": {
+                    "fields": {
+                        "keyword": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        }
+                    },
+                    "type": "text"
+                },
+                "type": {
+                    "fields": {
+                        "keyword": {
+                            "ignore_above": 256,
+                            "type": "keyword"
+                        }
+                    },
+                    "type": "text"
+                }
+            }
+        },
+        "settings": {
+            "index": {
+                "creation_date": "1660031068913",
+                "number_of_replicas": "1",
+                "number_of_shards": "1",
+                "provided_name": "hrvpp_product_catalog-0001",
+                "uuid": "RQPRrpHVSK64XxPi47PyJA",
+                "version": {
+                    "created": "7050199"
+                }
+            }
+        }
+    }
+}

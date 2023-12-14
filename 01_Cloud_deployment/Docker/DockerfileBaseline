@@ -1,0 +1,11 @@
+FROM vito-docker-private.artifactory.vgt.vito.be/dockerspark-centos
+
+RUN yum install -y file gdal python3-gdal python36 python36-devel python36-pip snap-8.0 file && yum clean all
+
+RUN echo $'[global]\n\
+index-url=https://puppet:<USER>@artifactory.vgt.vito.be/api/pypi/python-packages/simple' > /etc/pip.conf
+RUN /usr/bin/pip3 install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir pytest==5.1.2 importlib_resources==1.0.2 rasterio[s3]==1.0.26 scipy==1.4.1 pyproj==2.4.1 intel-tensorflow==2.1.0 lxml==4.4.1 awscli fire requests && pip install --no-cache-dir --no-deps biopar==1.1.0
+#patch gdal reader TERRA-1518 https://forum.step.esa.int/t/geotiff-bigtiff-export-creates-empty-file
+RUN curl https://puppet:<USER>@artifactory.vgt.vito.be/binaries-release-local/org/esa/s2tbx/s2tbx-gdal-reader/8.0.0/s2tbx-gdal-reader-8.0.0.jar --output /usr/local/snap/s2tbx/modules/org-esa-s2tbx-s2tbx-gdal-reader.jar
+RUN curl https://puppet:<USER>@artifactory.vgt.vito.be/binaries-release-local/sen2cor/Sen2Cor-02.10.1-Linux64.run --output /usr/local/share/applications/Sen2Cor-02.10.01-Linux64.run

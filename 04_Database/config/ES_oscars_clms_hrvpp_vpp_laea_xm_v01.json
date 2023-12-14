@@ -1,0 +1,399 @@
+{
+    "oscars_clms_hrvpp_vpp_laea_xm_v01_0001": {
+        "aliases": {
+            "oscars_clms_hrvpp_vpp_laea_xm_v01": {}
+        },
+        "mappings": {
+            "properties": {
+                "@context": {
+                    "index": false,
+                    "type": "text"
+                },
+                "bbox": {
+                    "type": "float"
+                },
+                "geometry": {
+                    "type": "geo_shape"
+                },
+                "hiddenInformation": {
+                    "properties": {
+                        "authorizations": {
+                            "type": "keyword"
+                        }
+                    }
+                },
+                "id": {
+                    "type": "keyword"
+                },
+                "properties": {
+                    "properties": {
+                        "acquisitionInformation": {
+                            "properties": {
+                                "acquisitionParameters": {
+                                    "properties": {
+                                        "acquisitionStation": {
+                                            "type": "keyword"
+                                        },
+                                        "acquisitionType": {
+                                            "type": "keyword"
+                                        },
+                                        "beginningDateTime": {
+                                            "type": "date"
+                                        },
+                                        "endingDateTime": {
+                                            "type": "date"
+                                        },
+                                        "operationalMode": {
+                                            "type": "keyword"
+                                        },
+                                        "orbitDirection": {
+                                            "type": "keyword"
+                                        },
+                                        "orbitNumber": {
+                                            "type": "long"
+                                        },
+                                        "polarisationChannels": {
+                                            "type": "keyword"
+                                        },
+                                        "polarisationMode": {
+                                            "type": "keyword"
+                                        },
+                                        "relativeOrbitNumber": {
+                                            "type": "long"
+                                        },
+                                        "tileId": {
+                                            "type": "keyword"
+                                        }
+                                    }
+                                },
+                                "platform": {
+                                    "properties": {
+                                        "platformSerialIdentifier": {
+                                            "type": "keyword"
+                                        },
+                                        "platformShortName": {
+                                            "type": "keyword"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "additionalAttributes": {
+                            "properties": {
+                                "missingDataPercentage": {
+                                    "type": "float"
+                                },
+                                "resolution": {
+                                    "type": "long"
+                                }
+                            }
+                        },
+                        "available": {
+                            "fields": {
+                                "keyword": {
+                                    "ignore_above": 256,
+                                    "type": "keyword"
+                                }
+                            },
+                            "type": "text"
+                        },
+                        "date": {
+                            "type": "date"
+                        },
+                        "identifier": {
+                            "type": "keyword"
+                        },
+                        "links": {
+                            "properties": {
+                                "alternates": {
+                                    "properties": {
+                                        "href": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "length": {
+                                            "type": "long"
+                                        },
+                                        "title": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "type": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        }
+                                    }
+                                },
+                                "data": {
+                                    "properties": {
+                                        "conformsTo": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "href": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "length": {
+                                            "type": "long"
+                                        },
+                                        "title": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "type": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        }
+                                    }
+                                },
+                                "previews": {
+                                    "properties": {
+                                        "category": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "conformsTo": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "href": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "length": {
+                                            "type": "long"
+                                        },
+                                        "type": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        }
+                                    }
+                                },
+                                "related": {
+                                    "properties": {
+                                        "category": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "href": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "length": {
+                                            "type": "long"
+                                        },
+                                        "title": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "type": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        }
+                                    }
+                                },
+                                "up": {
+                                    "properties": {
+                                        "href": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "length": {
+                                            "type": "long"
+                                        },
+                                        "title": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        },
+                                        "type": {
+                                            "fields": {
+                                                "keyword": {
+                                                    "ignore_above": 256,
+                                                    "type": "keyword"
+                                                }
+                                            },
+                                            "type": "text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "parentIdentifier": {
+                            "type": "keyword"
+                        },
+                        "productInformation": {
+                            "properties": {
+                                "availabilityTime": {
+                                    "type": "date"
+                                },
+                                "cloudCover": {
+                                    "type": "float"
+                                },
+                                "processingCenter": {
+                                    "type": "keyword"
+                                },
+                                "processingDate": {
+                                    "type": "date"
+                                },
+                                "processorName": {
+                                    "type": "keyword"
+                                },
+                                "productGroupId": {
+                                    "type": "keyword"
+                                },
+                                "productType": {
+                                    "type": "keyword"
+                                },
+                                "productVersion": {
+                                    "type": "keyword"
+                                },
+                                "snowCover": {
+                                    "type": "float"
+                                },
+                                "timeliness": {
+                                    "type": "keyword"
+                                }
+                            }
+                        },
+                        "published": {
+                            "type": "date"
+                        },
+                        "status": {
+                            "type": "keyword"
+                        },
+                        "title": {
+                            "type": "keyword"
+                        },
+                        "updated": {
+                            "type": "date"
+                        }
+                    }
+                },
+                "type": {
+                    "type": "keyword"
+                }
+            }
+        },
+        "settings": {
+            "index": {
+                "creation_date": "1666002863355",
+                "indexing": {
+                    "slowlog": {
+                        "level": "warn",
+                        "threshold": {
+                            "index": {
+                                "warn": "1s"
+                            }
+                        }
+                    }
+                },
+                "number_of_replicas": "1",
+                "number_of_shards": "5",
+                "provided_name": "oscars_clms_hrvpp_vpp_laea_xm_v01_0001",
+                "search": {
+                    "slowlog": {
+                        "level": "warn",
+                        "threshold": {
+                            "fetch": {
+                                "warn": "1s"
+                            },
+                            "query": {
+                                "warn": "1s"
+                            }
+                        }
+                    }
+                },
+                "uuid": "j3kM-AN3QIassSCQfeI7fA",
+                "version": {
+                    "created": "7050199"
+                }
+            }
+        }
+    }
+}

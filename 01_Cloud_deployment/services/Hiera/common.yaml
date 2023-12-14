@@ -1,0 +1,29 @@
+---
+profile_datamounts::enable_s3fs: true
+profile_base::puppet::server: foreman.vgt.vito.be
+profile_base::puppet::use_srv_records: false
+profile_base::puppet::cleanup_hanging: true
+profile_base::enable_logrotate: true
+profile_base::enable_monitoring: true
+profile_base::enable_puppet: true
+profile_base::enable_repos: true
+profile_base::enable_sudo: REDACTED
+profile_base::enable_users: true
+profile_base::root_user: REDACTED
+profile_base::users:
+  REDACTED
+  
+collectd::plugin::interface::interfaces:
+  - eth0
+  - eth1
+  - docker0
+
+profile_monitoring::vars:
+  config:
+    disks:
+      disk_ignore_eregi_path:
+        - '/var/cache/httpd/mod_auth_openidc/*'
+        - '/var/lib/kubelet/*'
+
+filebeat::logstash_ttl: 30s
+filebeat::logstash_pipelining: 0

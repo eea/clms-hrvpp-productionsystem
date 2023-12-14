@@ -1,0 +1,12 @@
+---
+profile_livy::livy_config:
+  'spark.master': 'spark://ts-master-1.hrvpp2.vgt.vito.be:7077'
+
+profile_spark::ssl_cert_name: 'ts-master-1.hrvpp2.vgt.vito.be'
+profile_spark::ssl_check_ports: [8082, 8480]
+profile_spark::spark_metrics_config:
+  'master.sink.graphite.host': 'graphite-1.hrvpp2.vgt.vito.be'
+  'master.sink.graphite.port': '2003'
+  'master.sink.graphite.period': '10'
+  'master.sink.graphite.unit': 'seconds'
+  'master.sink.graphite.prefix': 'spark_cluster.hrvpp2_prd.ts'

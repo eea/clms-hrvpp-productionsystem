@@ -1,0 +1,75 @@
+{
+  "variables": {
+    "environment": "",
+    "purpose": "",
+    "domain": "hrvpp2.vgt.vito.be"
+  },
+  "builders": [{
+    "type": "openstack",
+    "region": "WAW3-1",
+    "identity_endpoint": "https://keystone.cloudferro.com:5000/v3",
+    "ssh_username": "almalinux",
+    "image_name": "spark_worker_{{user `environment`}}_{{user `purpose`}}-{{isotime \"2006-01-02_03-04-05\"}}",
+    "source_image": "b71cd630-a03d-4ecd-bde6-4309638cdc23",
+    "flavor": "eo1.small",
+    "networks": ["c99bed21-4551-4619-8f40-cc83ba4e8807"],
+    "floating_ip_network": "959e9209-cf65-4afe-b17e-c5bfecdb0075",
+    "security_groups": ["allow_ping_ssh_icmp_rdp"]
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "spark_worker_image/packer-{{user `purpose`}}.yaml",
+    "destination": "/tmp/packer.yaml"
+  },
+  {
+    "type": "file",
+    "source": "files/puppet.conf",
+    "destination": "/tmp/puppet.conf"
+  },
+  {
+    "type": "file",
+    "source": "files/bootstrap.pp",
+    "destination": "/tmp/bootstrap.pp"
+  },
+  {
+    "type": "file",
+    "source": "spark_worker_image/files/extra_disk.sh",
+    "destination": "/home/almalinux/extra_disk"
+  },
+  {
+    "type": "file",
+    "source": "spark_worker_image/files/extra_disk_remove.sh",
+    "destination": "/home/almalinux/extra_disk_remove"
+  },
+  {
+    "type": "file",
+    "source": "spark_worker_image/files/spark_params.sh",
+    "destination": "/home/almalinux/spark_params"
+  },
+  {
+    "type": "file",
+    "source": "spark_worker_image/files/setup_worker.sh",
+    "destination": "/home/almalinux/setup_worker"
+  },
+  {
+    "type": "shell",
+    "execute_command": "echo 'almalinux' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+    "environment_vars": [
+      "FACTER_puppet_package=puppet-hr_vpp_{{user `environment`}}",
+      "FACTER_hiera_package=hiera-creodias",
+      "FACTER_spark_master={{user `purpose`}}-master-1.{{user `domain`}}",
+      "PUPPET_RUN_TIMES=2"
+    ],
+    "scripts": [
+      "files/run_puppet.sh"
+    ]
+  },
+  {
+    "type": "shell",
+    "execute_command": "echo 'almalinux' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+    "inline": [
+      "bash /home/almalinux/setup_worker {{user `purpose`}}",
+      "rm -vf /home/almalinux/setup_worker"
+    ]
+  }]
+}

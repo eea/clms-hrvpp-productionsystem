@@ -1,0 +1,74 @@
+---
+role: roles::isolated_spark_worker
+profile_base::enable_monitoring: false
+profile_base::enable_puppet: false
+profile_base::enable_hypervisor: false
+
+profile_base::packages::packages:
+  - tcpdump
+  - strace
+  - screen
+  - htop
+  - iotop
+  - nmap-ncat
+
+profile_spark::ssl: false
+
+# for post puppet systemd setup
+sudo::configs:
+  'eouser':
+    ensure: present
+    priority: 10
+    content: 'eouser ALL=(ALL) NOPASSWD: ALL'
+sudo::configs:
+  'almalinux':
+    ensure: present
+    priority: 10
+    content: 'almalinux ALL=(ALL) NOPASSWD: ALL'
+  'spark':
+    ensure: present
+    priority: 10
+    content: 'spark ALL=(ALL) NOPASSWD: /usr/local/bin/spark_params'
+
+profile_docker::registries:
+  vito-docker-private:
+    server: vito-docker-private.artifactory.vgt.vito.be
+    ensure: present
+profile_docker::images:
+  wekeo:
+    image: vito-docker-private.artifactory.vgt.vito.be/hrvpp-biopar-wekeo
+    image_tag: '110'
+
+#
+# GDD-2405
+#
+profile_spark::ssl_keystore_password: &keystore_password
+profile_spark::ssl_truststore_password: &truststore_password
+profile_spark::environment_config:
+  'SPARK_LOCAL_IP': 'CHANGEME_IP'
+  'SPARK_PUBLIC_DNS': 'CHANGEME_DNS'
+  'SPARK_WORKER_MEMORY': 'CHANGEME_MEM'
+  'SPARK_WORKER_CORES': 'CHANGEME_COR'
+  'AWS_ACCESS_KEY_ID': &access_key
+  'AWS_SECRET_ACCESS_KEY': &secret_key
+profile_spark::spark_config:
+  'hadoop.fs.s3a.endpoint': &aws_url 'https://s3.waw3-1.cloudferro.com'
+  'hadoop.fs.s3a.path.style.access': 'true'
+  'ssl.enabled': 'true'
+  'ssl.keyStore': &keystore /etc/security/spark/keystore.jks
+  'ssl.trustStore': /etc/security/spark/truststore.jks
+  'ssl.keyStorePassword': *keystore_password
+  'ssl.keyPassword': *keystore_password
+  'ssl.trustStorePassword': *truststore_password
+  'ssl.protocol': 'TLSv1.2'
+
+profile_datamounts::access_key_id: *access_key
+profile_datamounts::secret_access_key: *secret_key
+profile_datamounts::s3fs_url: *aws_url
+
+fluentbit::package_ensure: 1.8.10-8.el8
+fluentbit::bin_location: /usr/bin/fluent-bit
+fluentbit::outputs:
+  s3:
+    config:
+      bucket: hr-vpp-spark-logs-vi
